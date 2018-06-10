@@ -12,3 +12,6 @@
 */
 
 Route::view('/', 'login');
+
+Route::post('/login', 'LoginController@processData'); 
+

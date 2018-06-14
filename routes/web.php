@@ -12,6 +12,10 @@
 */
 
 Route::view('/', 'login');
+Route::view('/criar-conta', 'criar-conta');
+
 
 Route::post('/login', 'LoginController@processData'); 
+Route::post('/createAccount', 'LoginController@createAccount'); 
+
 

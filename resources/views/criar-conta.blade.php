@@ -33,11 +33,11 @@
 </head>
 <body>
 	
-	<div class="limiter" id="loginForm">
+	<div class="limiter"  id="createAccountForm">
 		<div class="container-login100">
-			<div class="wrap-login100" >
-				<form class="login100-form validate-form" method="post" action="/login">
-                    @csrf
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="post" action="/createAccount">
+					@csrf
 
 					<span class="login100-form-title p-b-26">
 						Seja Bem-Vindo
@@ -63,27 +63,24 @@
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
-								Login
+								Criar conta
 							</button>
 						</div>
 					</div>
 
 					<div class="text-center p-t-115">
 						<span class="txt1">
-							Não possui conta?
+							Já possui conta?
 						</span>
 
-						<a class="txt2" href="/criar-conta" id="createAccount">
-							Criar conta
+						<a class="txt2" href="/" id="login">
+							Logar
 						</a>
 					</div>
 				</form>
 			</div>
-			
 		</div>
 	</div>
-
-	
 
 	<div id="dropDownSelect1"></div>
 	

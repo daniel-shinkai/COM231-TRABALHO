@@ -9,7 +9,7 @@ use Redirect;
 
 class LoginController extends Controller
 {
-    public function processData(Request $request)
+    public function login(Request $request)
     {
         $email = $request->input('email');
         $password = $request->input('password');
@@ -18,10 +18,11 @@ class LoginController extends Controller
 
         if (Hash::check($password, $usuario->senha ))
         {
-            echo 'Login realizado com sucesso';
+            return redirect()->route('home');
+            
         }
         else {
-            echo 'erro no login';
+            return redirect()->route('home');
         }
     }
 
@@ -39,7 +40,7 @@ class LoginController extends Controller
 
         $usuario->save();
 
-        Redirect::route('/home',array('param1' => ""));
+        return redirect()->route('home');
 
     }
 }

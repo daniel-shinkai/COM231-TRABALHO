@@ -38,5 +38,22 @@ $(document).ready(function(){
         }
     });
 
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    console.log(CSRF_TOKEN);
+
+      $.post({
+        url: '/teste',
+        data: {
+            _token: CSRF_TOKEN,
+            id: 1,
+        },
+        dataType: 'json',
+        success: function(data) {
+          alert(data.name);
+        },
+        error: function(data) {
+
+        }
+    });
 })
 

@@ -19,6 +19,6 @@ Route::view('/home', 'welcome')->name('home');
 
 Route::post('/login', 'LoginController@login'); 
 Route::post('/createAccount', 'LoginController@createAccount'); 
-Route::post('/teste', 'ChartController@getReclamacaoFaixaEtaria'); 
+Route::post('/teste', 'ChartController@getFaixaEtariaChartData'); 
 
 

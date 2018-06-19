@@ -15,6 +15,8 @@ Route::view('/', 'login')->name('login');
 Route::view('/criar-conta', 'criar-conta');
 Route::view('/home', 'dashboard')->name('home'); 
 Route::view('/faixa-etaria', 'faixa-etaria'); 
+Route::view('/regiao', 'relatorio-regiao'); 
+
 
 Route::view('/master', 'layout.master'); 
 Route::view('/components', 'components'); 
@@ -26,6 +28,7 @@ Route::post('/createAccount', 'LoginController@createAccount');
 Route::post('/getFaixaEtariaChartData', 'ChartController@getFaixaEtariaChartData'); 
 Route::post('/getProblemaByArea', 'ChartController@getProblemaByArea'); 
 Route::post('/getReclamacaoPorRegiaoEProblema', 'ChartController@getReclamacaoPorRegiaoEProblema'); 
+Route::post('/getReclamacaoPorRegiao', 'ChartController@getReclamacaoPorRegiao'); 
 
 
 
@@ -33,4 +36,4 @@ Route::get('/getUf', 'ChartController@getDistinctState');
 Route::get('/getArea', 'ChartController@getDistinctArea');
 Route::get('/getRegion', 'ChartController@getDistinctRegion'); 
 Route::get('/getReclamationByArea', 'ChartController@getDistinctAreaAndCount'); 
-
+Route::get('/getSegmento', 'ChartController@getDistinctSegment'); 

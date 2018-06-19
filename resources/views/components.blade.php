@@ -55,6 +55,14 @@
         <button type="submit">Send</button>
     </div>
 
+    <div class="styled-select slate">
+        <select name="regiao" id="regiao">
+          <option value="">Selecione Região</option>
+
+        </select>
+      </div>
+
+
   </form>
       
  

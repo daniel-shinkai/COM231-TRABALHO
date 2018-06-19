@@ -3,6 +3,7 @@ $(document).ready(function(){
     populateUfInput();
     populateAreaInput();
     populateRegionInput();
+    populateSegmentoInput();
 
     let today = new Date().toISOString().substr(0, 10);
     document.querySelector("#dateInput").value = today;
@@ -67,3 +68,21 @@ function populateRegionInput(){
     });
 }
 
+function populateSegmentoInput(){
+
+    $.get({
+        url: '/getSegmento',
+       
+        dataType: 'json',
+        success: function(data) {
+
+            data.forEach(element => {
+                $('#segmento').append('<option value="' + element.segmento_mercado + '">' + element.segmento_mercado + '</option>')
+            });
+
+        },
+        error: function(data) {
+    
+        }
+    });
+}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Consumidor;
 use App\Reclamacoes;
+use App\Empresa;
 use DB;
 use DateTime;
 
@@ -161,6 +162,35 @@ class ChartController extends Controller
         ->orderBy('quantidadeReclamacao', 'desc')
         ->get();
 
+
+        return response()->json($data);
+
+    }
+
+    public function getDistinctSegment()
+    {
+        $segmento = Empresa::distinct()->select('segmento_mercado')->groupBy('segmento_mercado')->get();
+        
+        return response()->json($segmento);
+    }
+
+    public function getReclamacaoPorRegiao(Request $request)
+    {
+        $segmento = $request->input('segmento');
+        $dataFinal = $request->input('dataFinal');
+        $regiao = $request->input('regiao');
+
+    
+        $data = DB::table('consumidor')
+        ->join('reclamacao' , 'id_consumidor' , '=', 'fk_id_consumidor')
+        ->join('empresa' , 'reclamacao.fk_nome_comercial' , '=', 'nome_comercial')
+        ->select('consumidor.uf', DB::raw('count(*) as quantidadeReclamacao'))
+        ->where('consumidor.regiao' , $regiao)
+        ->where('reclamacao.data_finalizacao', '<',  $dataFinal)
+        ->where('empresa.segmento_mercado', $segmento)
+        ->groupBy('consumidor.uf')
+        ->orderBy('quantidadeReclamacao', 'desc')
+        ->get();
 
         return response()->json($data);
 

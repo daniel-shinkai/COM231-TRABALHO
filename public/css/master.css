@@ -1,0 +1,23 @@
+.main-content-inner {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.styled-select{
+    display: inline-block;
+}
+
+h1 {
+    margin-bottom: 40px !important;
+}
+
+.inline-block-cl {
+    display: inline-block;
+}
+
+.btn-div {
+    margin: 0, 40%;
+}
+
+.btn-primary {
+}

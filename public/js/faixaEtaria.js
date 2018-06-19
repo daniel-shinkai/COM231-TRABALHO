@@ -1,13 +1,65 @@
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+
 $(document).ready(function(){
+
+    var myChart = createNewChart();
+
+
+    getChartData(myChart);
+})
+
+function getChartData(myChart){
+    $('#getChartData').on('click', function (){
+
+        $.post({
+            url: '/getFaixaEtariaChartData',
+            data: {
+                _token: CSRF_TOKEN,
+                area: $('#areaInput').val(),
+                situacao: $('#situacao').val(),
+                foiAtendida: $('#foiSelecionado').val(),
+                dataFinal: $('#dateInput').val()
+            },
+            dataType: 'json',
+            success: function(data) {
+
+                myChart.destroy();
+                myChart = createNewChart();
+
+                data.forEach(element => {
+                    myChart.data.labels.push(element.faixa_etaria);
+                    myChart.data.datasets.forEach((dataset) => {
+                        dataset.data.push(element.totalReclamacao);
+                    });
+                  myChart.update();
+                });
+
+                // data.forEach(element => {
+                //     myChart.data.labels.pop();
+                //     myChart.data.datasets.forEach((dataset) => {
+                //         dataset.data.pop();
+                //     });
+                // });
+
+            },
+            error: function(data) {
+            }
+        });
+    })
+}
+
+function createNewChart(){
+
     var ctx = document.getElementById("myChart").getContext('2d');
 
-    var myChart = new Chart(ctx, {
+    return new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: [],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Número de Reclamações',
+                data: [],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -31,29 +83,26 @@ $(document).ready(function(){
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
-                    }
+                        beginAtZero:true,
+                        autoSkip:false
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Quantidade de Reclamações'
+                      }
+                }],
+                xAxes: [{
+                    
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Faixa Etária'
+                      }
                 }]
-            }
+            },
+            title: {
+                display: true,
+                text: 'Quantidade de reclamação por faixa etária'
+              }
         }
     });
-
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    console.log(CSRF_TOKEN);
-
-      $.post({
-        url: '/teste',
-        data: {
-            _token: CSRF_TOKEN,
-            id: 1,
-        },
-        dataType: 'json',
-        success: function(data) {
-          alert(data.name);
-        },
-        error: function(data) {
-
-        }
-    });
-})
-
+}

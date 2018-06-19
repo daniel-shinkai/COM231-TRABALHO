@@ -1,5 +1,6 @@
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var labelName;
+var barLabelName;
 
 
 var doughnutConfig = {
@@ -93,12 +94,62 @@ var barConfig =  {
     }
 }
 
+var lineConfig = {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Quantidade de Reclamações Por Região',
+            backgroundColor: 'rgb(0,191,255)',
+            borderColor: 'rgb(0,191,255)',
+            data: [
+              
+            ],
+            fill: false,
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Chart.js Line Chart'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Região'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Quantidade de Reclamações'
+                }
+            }]
+        }
+    }
+};
+
 
 var ctx = document.getElementById('chart-area').getContext('2d');
 var myDoughnut = new Chart(ctx, doughnutConfig);
 
 var ctx_bar = document.getElementById('bar-chart-area').getContext('2d');
 var barChart = new Chart(ctx_bar, barConfig);
+
+var ctx_line = document.getElementById('line-chart-area').getContext('2d');
+var myLine = new Chart(ctx_line, lineConfig);
 
 document.getElementById("chart-area").onclick = function(e) 
 {
@@ -144,6 +195,48 @@ document.getElementById("chart-area").onclick = function(e)
     });
 };
 
+document.getElementById("bar-chart-area").onclick = function(e) 
+{
+    var activeIndex = barChart.tooltip._lastActive[0]._index;
+    barLabelName = barChart.data.labels[activeIndex];
+
+  
+    $('#lastChart').show();
+    
+    $.post({
+        url: '/getReclamacaoPorRegiaoEProblema',
+        data : {
+            _token: CSRF_TOKEN,
+            problema: barLabelName,
+            regiao: $('#regiao').val(),
+            finalizada: $('#situacao').val()
+        },
+        dataType: 'json',
+        success: function(data) {
+    
+            for (let index = 0; index < 10; index++) {
+                myLine.data.labels.pop();
+                myLine.data.datasets.forEach((dataset) => {
+                    dataset.data.pop();
+                });
+                myLine.update();
+                
+            }
+
+            data.forEach(element => {
+                
+                myLine.data.labels.push(element.uf);
+                myLine.data.datasets.forEach((dataset) => {
+                    dataset.data.push(element.quantidadeReclamacao);
+                });
+                myLine.update();
+            })
+       
+        }
+       
+    });
+};
+
 
 function getDoghnutChartData(){
 
@@ -171,7 +264,7 @@ function getDoghnutChartData(){
 
 
 
-
+   
 
 $(document).ready(function(){
     getDoghnutChartData();

@@ -34,9 +34,13 @@
       </div>
 
     </div>
+
+    <div class="chartDiv" >
+      <canvas id="line-chart-area" width="800" height="400" ></canvas>
+    </div>
       
-</div>
   </div>
+</div>
   <script type="text/javascript" src="{{ URL::asset('js/dashboard.js') }}"></script>
 
 @stop

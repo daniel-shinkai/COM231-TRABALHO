@@ -145,4 +145,24 @@ class ChartController extends Controller
         return response()->json($data);
 
     }
+
+    public function getReclamacaoPorRegiaoEProblema(Request $request){
+        $problema = $request->input('problema');
+        $finalizada = $request->input('finalizada');
+        $regiao = $request->input('regiao');
+
+    
+        $data = DB::table('consumidor')
+        ->join('reclamacao' , 'id_consumidor' , '=', 'fk_id_consumidor')
+        ->select('consumidor.uf', DB::raw('count(*) as quantidadeReclamacao'))
+        ->where('consumidor.regiao' , $regiao)
+        ->where('reclamacao.problema', 'like',  $problema . '%')
+        ->groupBy('consumidor.uf')
+        ->orderBy('quantidadeReclamacao', 'desc')
+        ->get();
+
+
+        return response()->json($data);
+
+    }
 }

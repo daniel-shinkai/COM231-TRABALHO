@@ -25,6 +25,8 @@ Route::post('/login', 'LoginController@login');
 Route::post('/createAccount', 'LoginController@createAccount'); 
 Route::post('/getFaixaEtariaChartData', 'ChartController@getFaixaEtariaChartData'); 
 Route::post('/getProblemaByArea', 'ChartController@getProblemaByArea'); 
+Route::post('/getReclamacaoPorRegiaoEProblema', 'ChartController@getReclamacaoPorRegiaoEProblema'); 
+
 
 
 Route::get('/getUf', 'ChartController@getDistinctState'); 

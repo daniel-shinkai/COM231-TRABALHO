@@ -11,7 +11,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
-<script type="text/javascript" src="{{ URL::asset('js/faixaEtaria.js') }}"></script>
 <link rel="stylesheet" href="{{ URL::asset('css/faixaEtaria.css') }}" />
 <link rel="stylesheet" href="{{ URL::asset('css/input.css') }}" />
 <link rel="stylesheet" href="{{ URL::asset('css/master.css') }}" />

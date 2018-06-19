@@ -2,6 +2,7 @@
 $(document).ready(function(){
     populateUfInput();
     populateAreaInput();
+    populateRegionInput();
 
     let today = new Date().toISOString().substr(0, 10);
     document.querySelector("#dateInput").value = today;
@@ -45,5 +46,24 @@ function populateAreaInput(){
     
         }
     });
-
 }
+
+function populateRegionInput(){
+
+    $.get({
+        url: '/getRegion',
+       
+        dataType: 'json',
+        success: function(data) {
+
+            data.forEach(element => {
+                $('#regiao').append('<option value="' + element.regiao + '">' + element.regiao + '</option>')
+            });
+
+        },
+        error: function(data) {
+    
+        }
+    });
+}
+

@@ -98,11 +98,17 @@ class ChartController extends Controller
 
     }
 
- 
+
+    public function getDistinctState()
+    {
+        $uf = Consumidor::distinct()->select('uf')->groupBy('uf')->get();
+        
+        return response()->json($uf);
+    }
 
     public function getDistinctRegion()
     {
-        $regioes = Consumidor::distinct()->select('uf')->groupBy('uf')->get();
+        $regioes = Consumidor::distinct()->select('regiao')->groupBy('regiao')->get();
         
         return response()->json($regioes);
     }
@@ -112,5 +118,31 @@ class ChartController extends Controller
         $area = Reclamacoes::distinct()->select('area')->groupBy('area')->get();
         
         return response()->json($area);
+    }
+
+    public function getDistinctAreaAndCount(){
+        $data = DB::table('reclamacao')
+            ->select('area', DB::raw('count(*) as totalReclamacao'))
+            ->groupBy('area')
+            ->orderBy('totalReclamacao', 'desc')
+            ->limit(7)
+            ->get();
+
+        return response()->json($data);
+
+    }
+
+    public function getProblemaByArea(Request $request){
+        $area = $request->input('area');
+        $data = DB::table('reclamacao')
+        ->select('problema', DB::raw('count(*) as quantidadeReclamacao'))
+        ->where('area' , $area)
+        ->groupBy('problema')
+        ->orderBy('quantidadeReclamacao', 'desc')
+        ->limit(5)
+        ->get();
+
+        return response()->json($data);
+
     }
 }

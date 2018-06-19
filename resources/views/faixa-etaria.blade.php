@@ -48,8 +48,10 @@
   
 <div id="chartDiv">
     <canvas id="myChart" width="400" height="400"></canvas>
-
 </div>
+
+<script type="text/javascript" src="{{ URL::asset('js/faixaEtaria.js') }}"></script>
+
 @stop
 
 

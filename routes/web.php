@@ -24,7 +24,11 @@ Route::view('/components', 'components');
 Route::post('/login', 'LoginController@login'); 
 Route::post('/createAccount', 'LoginController@createAccount'); 
 Route::post('/getFaixaEtariaChartData', 'ChartController@getFaixaEtariaChartData'); 
+Route::post('/getProblemaByArea', 'ChartController@getProblemaByArea'); 
 
-Route::get('/getUf', 'ChartController@getDistinctRegion'); 
-Route::get('/getArea', 'ChartController@getDistinctArea'); 
+
+Route::get('/getUf', 'ChartController@getDistinctState'); 
+Route::get('/getArea', 'ChartController@getDistinctArea');
+Route::get('/getRegion', 'ChartController@getDistinctRegion'); 
+Route::get('/getReclamationByArea', 'ChartController@getDistinctAreaAndCount'); 
 

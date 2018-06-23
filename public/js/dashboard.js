@@ -31,7 +31,8 @@ var doughnutConfig = {
         },
         title: {
             display: true,
-            text: 'Quantidade de Reclamações por Área'
+            text: 'Quantidade de Reclamações por Área',
+            fontSize: 35
         },
         animation: {
             animateScale: true,
@@ -89,7 +90,8 @@ var barConfig =  {
         },
         title: {
             display: true,
-            text: 'Quantidade de reclamação por problema'
+            text: 'Quantidade de Reclamação por Problema',
+            fontSize: 35
           }
     }
 }
@@ -112,7 +114,9 @@ var lineConfig = {
         responsive: true,
         title: {
             display: true,
-            text: 'Chart.js Line Chart'
+            text: 'Chart.js Line Chart',
+            fontSize: 35
+
         },
         tooltips: {
             mode: 'index',
@@ -156,12 +160,7 @@ document.getElementById("chart-area").onclick = function(e)
     var activeIndex = myDoughnut.tooltip._lastActive[0]._index;
     labelName = myDoughnut.data.labels[activeIndex];
 
-   // barChart.destroy();
-   // var ctx_bar = document.getElementById('bar-chart-area').getContext('2d');
-
-    //barChart = new Chart(ctx_bar, barConfig);
-
-    $('#lastChart').show();
+    //$('#lastChart').show();
     
     $.post({
         url: '/getProblemaByArea',
@@ -171,7 +170,15 @@ document.getElementById("chart-area").onclick = function(e)
         },
         dataType: 'json',
         success: function(data) {
+
+            $("#barChartDiv").removeClass('d-none');
             
+            $('html, body').animate({
+                scrollTop: $("#barChartDiv").offset().top
+              }, 1000);
+             
+            barChart.options.title.text = "Problemas de " + labelName;
+
             data.forEach(element => {
                 barChart.data.labels.pop(element.problema.substring(0, 20));
                 barChart.data.datasets.forEach((dataset) => {
@@ -268,7 +275,6 @@ function getDoghnutChartData(){
 
 $(document).ready(function(){
     getDoghnutChartData();
-    $('#lastChart').hide();
 
 
 })

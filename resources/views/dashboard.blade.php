@@ -19,11 +19,14 @@
 
     <div class="row d-none" id="barChartDiv">
 
-      <div class="col-md-11">
+      <div class="col-md-12">
 
         <div class="chartDiv" >
-          <canvas id="bar-chart-area" width="800" height="600"></canvas>
+          <canvas id="bar-chart-area" width="800" height="500"></canvas>
         </div>
+
+        <button class="btn-primary pdf-button" id="pdfBar">Gerar PDF </button>
+
 
          <div class="styled-select slate">
           <select name="situacao" id="situacao">
@@ -42,6 +45,7 @@
 
     <div class="row d-none" id="lineChartDiv">
       <div class="col-md-12">
+        <h2 id="problemText">Problea </h2>
         <div class="chartDiv">
           <canvas id="line-chart-area" width="800" height="400" ></canvas>
         </div>

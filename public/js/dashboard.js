@@ -189,11 +189,19 @@ document.getElementById("chart-area").onclick = function(e)
 
             data.forEach(element => {
                 
-                barChart.data.labels.push(element.problema.substring(0, 20));
+                barChart.data.labels.push(formatLabel(element.problema, 15));
                 barChart.data.datasets.forEach((dataset) => {
                     dataset.data.push(element.quantidadeReclamacao);
                 });
                 barChart.update();
+            })
+
+            $("#pdfBar").on("click", function(){
+                var imgData = document.getElementById('bar-chart-area').toDataURL("image/png", 1.0);
+                var pdf = new jsPDF();
+
+                pdf.addImage(imgData, 'PNG', 0, 0, 200, 200);
+                pdf.save("download.pdf");
             })
 
        
@@ -208,6 +216,8 @@ document.getElementById("bar-chart-area").onclick = function(e)
     var activeIndex = barChart.tooltip._lastActive[0]._index;
     barLabelName = barChart.data.labels[activeIndex];
     
+    barLabelName = arrayToString(barLabelName);
+    console.log(barLabelName);
     $.post({
         url: '/getReclamacaoPorRegiaoEProblema',
         data : {
@@ -224,6 +234,8 @@ document.getElementById("bar-chart-area").onclick = function(e)
             $('html, body').animate({
                 scrollTop: $("#lineChartDiv").offset().top
               }, 1000);
+
+            $("#problemText").text(barLabelName);
 
             myLine.options.title.text =  $('#situacao').val() + ': Região ' +  $('#regiao').val();
     
@@ -271,7 +283,7 @@ function getDoghnutChartData(){
                 var imgData = document.getElementById('chart-area').toDataURL("image/png", 1.0);
                 var pdf = new jsPDF();
 
-                pdf.addImage(imgData, 'JPEG', 0, 0);
+                pdf.addImage(imgData, 'JPEG', 0, 0, 200,200);
                 pdf.save("download.pdf");
             })
 
@@ -290,6 +302,57 @@ $(document).ready(function(){
 
 })
 
+function formatLabel(str, maxwidth){
+    var sections = [];
+    var words = str.split(" ");
+    var temp = "";
 
+    words.forEach(function(item, index){
+        if(temp.length > 0)
+        {
+            var concat = temp + ' ' + item;
 
-    
+            if(concat.length > maxwidth){
+                sections.push(temp);
+                temp = "";
+            }
+            else{
+                if(index == (words.length-1))
+                {
+                    sections.push(concat);
+                    return;
+                }
+                else{
+                    temp = concat;
+                    return;
+                }
+            }
+        }
+
+        if(index == (words.length-1))
+        {
+            sections.push(item);
+            return;
+        }
+
+        if(item.length < maxwidth) {
+            temp = item;
+        }
+        else {
+            sections.push(item);
+        }
+
+    });
+
+    return sections;
+}
+
+function arrayToString(array){
+    var str = '';
+
+    array.forEach(element => {
+        str = str + element + ' ';
+    });
+
+    return str;
+}    

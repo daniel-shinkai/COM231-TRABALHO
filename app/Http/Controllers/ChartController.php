@@ -151,7 +151,6 @@ class ChartController extends Controller
         $problema = $request->input('problema');
         $finalizada = $request->input('finalizada');
         $regiao = $request->input('regiao');
-
     
         $data = DB::table('consumidor')
         ->join('reclamacao' , 'id_consumidor' , '=', 'fk_id_consumidor')

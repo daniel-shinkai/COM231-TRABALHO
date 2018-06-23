@@ -202,13 +202,11 @@ document.getElementById("chart-area").onclick = function(e)
     });
 };
 
+
 document.getElementById("bar-chart-area").onclick = function(e) 
 {
     var activeIndex = barChart.tooltip._lastActive[0]._index;
     barLabelName = barChart.data.labels[activeIndex];
-
-  
-    $('#lastChart').show();
     
     $.post({
         url: '/getReclamacaoPorRegiaoEProblema',
@@ -220,6 +218,14 @@ document.getElementById("bar-chart-area").onclick = function(e)
         },
         dataType: 'json',
         success: function(data) {
+
+            $("#lineChartDiv").removeClass('d-none');
+            
+            $('html, body').animate({
+                scrollTop: $("#lineChartDiv").offset().top
+              }, 1000);
+
+            myLine.options.title.text =  $('#situacao').val() + ': Região ' +  $('#regiao').val();
     
             for (let index = 0; index < 10; index++) {
                 myLine.data.labels.pop();
@@ -261,17 +267,22 @@ function getDoghnutChartData(){
                 myDoughnut.update();
             })
 
+            $("#pdfDoghnut").on("click", function(){
+                var imgData = document.getElementById('chart-area').toDataURL("image/png", 1.0);
+                var pdf = new jsPDF();
+
+                pdf.addImage(imgData, 'JPEG', 0, 0);
+                pdf.save("download.pdf");
+            })
+
         },
         error: function(data) {
     
         }
     });
-
 }
 
 
-
-   
 
 $(document).ready(function(){
     getDoghnutChartData();

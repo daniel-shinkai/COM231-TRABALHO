@@ -1,3 +1,8 @@
 .row {
     margin-bottom: 100px;
 }
+
+.pdf-button {
+    width: 20%;
+    margin: 20px 40%;
+}

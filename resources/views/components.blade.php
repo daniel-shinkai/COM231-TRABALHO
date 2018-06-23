@@ -35,8 +35,8 @@
 
     <div class="styled-select slate">
       <select name="situacao" id="situacao">
-        <option value="Avaliada">Finalizada Avaliada</option>
-        <option value="naoAvaliada">Finalizada Não Avaliada</option>
+        <option value="Finalizada avaliada">Finalizada Avaliada</option>
+        <option value="Finalizada não avaliada">Finalizada Não Avaliada</option>
       </select>
     </div>
 

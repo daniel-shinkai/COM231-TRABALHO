@@ -16,6 +16,9 @@ Route::view('/criar-conta', 'criar-conta');
 Route::view('/home', 'dashboard')->name('home'); 
 Route::view('/faixa-etaria', 'faixa-etaria'); 
 Route::view('/regiao', 'relatorio-regiao'); 
+Route::view('/crud', 'crud-reclamacao'); 
+Route::view('/adhoc', 'relatorio-adhoc'); 
+
 
 
 Route::view('/master', 'layout.master'); 
@@ -37,3 +40,5 @@ Route::get('/getArea', 'ChartController@getDistinctArea');
 Route::get('/getRegion', 'ChartController@getDistinctRegion'); 
 Route::get('/getReclamationByArea', 'ChartController@getDistinctAreaAndCount'); 
 Route::get('/getSegmento', 'ChartController@getDistinctSegment'); 
+Route::get('/getReclamations', 'ReclamacaoController@getReclamations'); 
+

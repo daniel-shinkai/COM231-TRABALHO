@@ -1,0 +1,12 @@
+#openModal {
+    margin-bottom: 40px;
+}
+
+.modal-dialog {
+    width: 80%;
+    max-width: 80%;   
+}
+
+p {
+    margin-bottom: 5px;       
+}

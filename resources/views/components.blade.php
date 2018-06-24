@@ -62,6 +62,12 @@
         </select>
       </div>
 
+      <div class="form-group col-md-6">
+          <select class="form-control"  name="faixa" id="faixa">
+              <option value="">Faixa Etária</option>
+          </select>
+      </div>
+
 
   </form>
       

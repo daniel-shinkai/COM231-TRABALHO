@@ -4,6 +4,7 @@ $(document).ready(function(){
     populateAreaInput();
     populateRegionInput();
     populateSegmentoInput();
+    populateFaixaEtaria();
 
     let today = new Date().toISOString().substr(0, 10);
     document.querySelector("#dateInput").value = today;
@@ -78,6 +79,25 @@ function populateSegmentoInput(){
 
             data.forEach(element => {
                 $('#segmento').append('<option value="' + element.segmento_mercado + '">' + element.segmento_mercado + '</option>')
+            });
+
+        },
+        error: function(data) {
+    
+        }
+    });
+}
+
+function populateFaixaEtaria(){
+
+    $.get({
+        url: '/getFaixaEtaria',
+       
+        dataType: 'json',
+        success: function(data) {
+
+            data.forEach(element => {
+                $('#faixa').append('<option value="' + element.faixa_etaria + '">' + element.faixa_etaria + '</option>')
             });
 
         },

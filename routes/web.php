@@ -32,6 +32,8 @@ Route::post('/getFaixaEtariaChartData', 'ChartController@getFaixaEtariaChartData
 Route::post('/getProblemaByArea', 'ChartController@getProblemaByArea'); 
 Route::post('/getReclamacaoPorRegiaoEProblema', 'ChartController@getReclamacaoPorRegiaoEProblema'); 
 Route::post('/getReclamacaoPorRegiao', 'ChartController@getReclamacaoPorRegiao'); 
+Route::post('/saveReclamation', 'ReclamacaoController@saveReclamation'); 
+
 
 
 
@@ -41,4 +43,6 @@ Route::get('/getRegion', 'ChartController@getDistinctRegion');
 Route::get('/getReclamationByArea', 'ChartController@getDistinctAreaAndCount'); 
 Route::get('/getSegmento', 'ChartController@getDistinctSegment'); 
 Route::get('/getReclamations', 'ReclamacaoController@getReclamations'); 
+Route::get('/getFaixaEtaria', 'ReclamacaoController@getFaixaEtaria'); 
+
 

@@ -256,6 +256,14 @@ document.getElementById("bar-chart-area").onclick = function(e)
                 });
                 myLine.update();
             })
+
+            $("#pdfLine").on("click", function(){
+                var imgData = document.getElementById('line-chart-area').toDataURL("image/png", 1.0);
+                var pdf = new jsPDF();
+
+                pdf.addImage(imgData, 'PNG', 0, 0, 200, 200);
+                pdf.save("download.pdf");
+            })
        
         }
        

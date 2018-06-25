@@ -49,8 +49,11 @@
         <div class="chartDiv">
           <canvas id="line-chart-area" width="800" height="400" ></canvas>
         </div>
+        <button class="btn-primary pdf-button" id="pdfLine">Gerar PDF </button>
+
       </div>
     </div>
+
     
       
   </div>

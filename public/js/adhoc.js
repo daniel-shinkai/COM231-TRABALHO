@@ -60,10 +60,11 @@ function getProblemaByArea(){
     $("#area").on('click', function(){
         
         $.post({
-            url: '/getProblemaByArea',
+            url: '/getProblemaByAreaAndSegmento',
             data : {
                 _token: CSRF_TOKEN,
                 area: $("#area").val(),
+                segmento: $("#segmento").val()
          
             },
             dataType: 'json',

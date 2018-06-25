@@ -31,6 +31,9 @@ Route::post('/createAccount', 'LoginController@createAccount');
 Route::post('/getFaixaEtariaChartData', 'ChartController@getFaixaEtariaChartData'); 
 Route::post('/getProblemaByArea', 'ChartController@getProblemaByArea'); 
 Route::post('/getProblemaByAreaAndSituation', 'ChartController@getProblemaByAreaAndSituation'); 
+Route::post('/getProblemaByAreaAndSegmento', 'ChartController@getProblemaByAreaAndSegmento'); 
+
+
 
 Route::post('/getReclamacaoPorRegiaoEProblema', 'ChartController@getReclamacaoPorRegiaoEProblema'); 
 Route::post('/getReclamacaoPorRegiao', 'ChartController@getReclamacaoPorRegiao'); 

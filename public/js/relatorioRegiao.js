@@ -34,13 +34,16 @@ function getChartData(myChart){
                 myChart.destroy();
                 myChart = createNewChart();
 
+                myChart.options.title.text = "Reclamações do segmento " + $('#segmento').val();
+
                 data.forEach(element => {
                     myChart.data.labels.push(element.uf);
                     myChart.data.datasets.forEach((dataset) => {
-                        dataset.data.push(element.quantidadeReclamacao);
+                        dataset.data.push(calculateRatio(element.uf, element.quantidadeReclamacao));
                     });
                   myChart.update();
                 });
+
 
                 // data.forEach(element => {
                 //     myChart.data.labels.pop();
@@ -98,7 +101,7 @@ function createNewChart(){
                     },
                     scaleLabel: {
                         display: true,
-                        labelString: 'Quantidade de Reclamações'
+                        labelString: 'Quantidade de Reclamações a cada 10000 habitantes'
                       }
                 }],
                 xAxes: [{
@@ -111,8 +114,102 @@ function createNewChart(){
             },
             title: {
                 display: true,
-                text: 'Quantidade de reclamação por faixa etária'
+                fontSize: 35,
+                text: 'Quantidade de reclamação'
               }
         }
     });
 }
+
+function calculateRatio(uf, total){
+    var ratio = 10000;
+    //alert(uf);
+    switch(uf){
+        case 'AC':
+            return total / 829619 * ratio;
+            break;
+        case 'AL':
+            return total / 3375823 * ratio;
+            break;
+        case 'AM':
+            return total / 4063614 * ratio;
+            break;
+        case 'AP':
+            return total / 797722 * ratio;
+            break;
+        case 'BA':
+            return total / 15344447 * ratio;
+            break;
+        case 'CE':
+            return total / 9020460 * ratio;
+            break;
+        case 'DF':
+            return total / 3039444 * ratio;
+            break;
+        case 'ES':
+            return total / 4016356 * ratio;
+            break;
+        case 'GO':
+            return total / 6778772 * ratio;
+            break;
+        case 'MA':
+            return total / 7000229 * ratio;
+            break;
+        case 'MG':
+            return total / 21119536 * ratio;
+            break;
+        
+        case 'MS':
+            return total / 2713147 * ratio;
+            break;
+        case 'MT':
+            return total / 3344544 * ratio;
+            break;
+        case 'PA':
+            return total / 8366628 * ratio;
+            break;
+        case 'PB':
+            return total / 4025558 * ratio;
+            break;
+        case 'PE':
+            return total / 9473266 * ratio;
+            break;
+        case 'PI':
+            return total / 3219257 * ratio;
+            break;
+        case 'PR':
+            return total / 11320892 * ratio;
+            break;
+        case 'RJ':
+            return total / 16718956 * ratio;
+            break;
+        case 'RN':
+            return total / 3507003 * ratio;
+            break;
+        case 'RO':
+            return total / 1805788 * ratio;
+            break;
+        case 'RR':
+            return total / 522636 * ratio;
+            break;
+        
+
+        case 'RS':
+            return total / 11322895 * ratio;
+            break;
+        case 'SC':
+            return total / 7001161 * ratio;
+            break;
+        case 'SE':
+            return total / 2288116 * ratio;
+            break;
+        case 'SP':
+            return total / 45094866 * ratio;
+            break;
+        case 'TO':
+            return total / 1550194 * ratio;
+            break;
+        
+    }
+}
+

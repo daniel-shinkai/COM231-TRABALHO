@@ -15,7 +15,7 @@ class ChartController extends Controller
 
      const dadosPopulacao = [
         'norte' => [
-            'Rondônia' => '1.805788',
+            'Rondônia' => '1805788',
             'Acre' =>  '829619',
             'Amazonas' => '4063614',
             'Roraima' => '522636',
@@ -145,6 +145,24 @@ class ChartController extends Controller
 
         return response()->json($data);
 
+    }
+
+    public function getProblemaByAreaAndSegmento(Request $request)
+    {
+        $area = $request->input('area');
+        $segmento = $request->input('segmento');
+
+        $data = DB::table('reclamacao')
+        ->join('empresa' , 'reclamacao.fk_nome_comercial' , '=', 'nome_comercial')
+        ->select('reclamacao.problema', DB::raw('count(*) as quantidadeReclamacao'))
+        ->where('reclamacao.area', $area)
+        ->where('empresa.segmento_mercado', $segmento)
+        ->groupBy('reclamacao.problema')
+        ->orderBy('quantidadeReclamacao', 'desc')
+        ->limit(5)
+        ->get();
+
+        return response()->json($data);
     }
 
     public function getProblemaByAreaAndSituation(Request $request){

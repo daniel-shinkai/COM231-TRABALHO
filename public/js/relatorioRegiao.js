@@ -115,7 +115,7 @@ function createNewChart(){
             title: {
                 display: true,
                 fontSize: 35,
-                text: 'Quantidade de reclamação'
+                text: ''
               }
         }
     });

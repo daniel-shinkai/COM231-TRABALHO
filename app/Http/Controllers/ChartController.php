@@ -147,6 +147,23 @@ class ChartController extends Controller
 
     }
 
+    public function getProblemaByAreaAndSituation(Request $request){
+        $situacao = $request->input('situacao');
+        $area = $request->input('area');
+        $data = DB::table('reclamacao')
+        ->select('problema', DB::raw('count(*) as quantidadeReclamacao'))
+        ->where('area' , $area)
+        ->where('situacao', $situacao)
+        ->groupBy('problema')
+        ->orderBy('quantidadeReclamacao', 'desc')
+        ->limit(5)
+        ->get();
+
+        return response()->json($data);
+
+    }
+    
+
     public function getReclamacaoPorRegiaoEProblema(Request $request){
         $problema = $request->input('problema');
         $finalizada = $request->input('finalizada');

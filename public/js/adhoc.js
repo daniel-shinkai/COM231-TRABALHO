@@ -97,11 +97,12 @@ function updateOnSituationChange(){
     $("#situacao").on('change', function(){
         if($("#area").val()){
             $.post({
-                url: '/getProblemaByArea',
+                url: '/getProblemaByAreaAndSituation',
                 data : {
                     _token: CSRF_TOKEN,
                     area: $("#area").val(),
-             
+                    situacao: $("#situacao").val()
+
                 },
                 dataType: 'json',
                 success: function(data) {

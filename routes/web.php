@@ -30,6 +30,8 @@ Route::post('/login', 'LoginController@login');
 Route::post('/createAccount', 'LoginController@createAccount'); 
 Route::post('/getFaixaEtariaChartData', 'ChartController@getFaixaEtariaChartData'); 
 Route::post('/getProblemaByArea', 'ChartController@getProblemaByArea'); 
+Route::post('/getProblemaByAreaAndSituation', 'ChartController@getProblemaByAreaAndSituation'); 
+
 Route::post('/getReclamacaoPorRegiaoEProblema', 'ChartController@getReclamacaoPorRegiaoEProblema'); 
 Route::post('/getReclamacaoPorRegiao', 'ChartController@getReclamacaoPorRegiao'); 
 Route::post('/saveReclamation', 'ReclamacaoController@saveReclamation'); 

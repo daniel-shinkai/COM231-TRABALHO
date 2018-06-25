@@ -173,6 +173,26 @@ class ChartController extends Controller
         return response()->json($segmento);
     }
 
+    public function getAreaBySegmento(Request $request)
+    {
+        $segmento = $request->input('segmento');
+        $situacao = $request->input('situacao');
+
+
+        $data = DB::table('reclamacao')
+        ->join('empresa' , 'reclamacao.fk_nome_comercial' , '=', 'nome_comercial')
+        ->select('area', DB::raw('count(*) as quantidadeReclamacao'))
+        ->where('empresa.segmento_mercado', 'like', $segmento)
+        ->where('reclamacao.situacao' , $situacao)
+        ->groupBy('area')
+        ->orderBy('quantidadeReclamacao', 'desc')
+        ->limit(5)
+        ->get();
+
+    return response()->json($data);
+
+    }
+
     public function getReclamacaoPorRegiao(Request $request)
     {
         $segmento = $request->input('segmento');

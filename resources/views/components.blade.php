@@ -56,11 +56,18 @@
     </div>
 
     <div class="styled-select slate">
-        <select name="regiao" id="regiao">
-          <option value="">Selecione Região</option>
+      <select name="regiao" id="regiao">
+        <option value="">Selecione Região</option>
 
-        </select>
-      </div>
+      </select>
+    </div>
+
+    <div class="styled-select slate">
+      <select name="segmento" id="segmento">
+        <option value="">Selecione Setor</option>
+
+      </select>
+    </div>
 
       <div class="form-group col-md-6">
           <select class="form-control"  name="faixa" id="faixa">
@@ -68,6 +75,11 @@
           </select>
       </div>
 
+   <div class="styled-select slate">
+      <select name="segmento" id="segmento">
+        <option value="sim">Selecione Segmento</option>
+      </select>
+    </div>
 
   </form>
       

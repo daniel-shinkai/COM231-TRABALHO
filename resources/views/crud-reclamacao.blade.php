@@ -4,7 +4,7 @@
 
     <div class="container">
   
-        <h1>Relatório Por Faixa Etária</h1>
+        <h1>Crud de Reclamação</h1>
 
         <button class="btn-success" data-toggle="modal" data-target="#modalCadastrar" id="openModal">
             Adicionar Nova Reclamação

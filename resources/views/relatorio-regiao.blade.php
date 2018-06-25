@@ -41,8 +41,10 @@
   
 <div id="chartDiv">
     <canvas id="myChart" width="400" height="400"></canvas>
-
 </div>
+
+    <button class="btn-primary pdf-button" id="pdfBar">Gerar PDF </button>
+
 
   <script type="text/javascript" src="{{ URL::asset('js/relatorioRegiao.js') }}"></script>
 
